@@ -1,3 +1,7 @@
+# Simple application to demonstrate migration to Google Cloud
+![Architecture](on_premise_architecture.png)
+
+
 ## Docker Compose
 Build:
 ```
