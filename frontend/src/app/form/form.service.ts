@@ -19,9 +19,9 @@ export class FormService {
     return this.http.get(`${environment.apiUrl}/api/${uuid}`);
   }
 
-  findAll(): Observable<Object[]> {
+  findAll(): Observable<Object> {
     console.log(`Find all`);
-    return this.http.get<Object[]>(`${environment.apiUrl}/api`);
+    return this.http.get<Object>(`${environment.apiUrl}/api`);
   }
 
   deleteAll(): Observable<Object> {

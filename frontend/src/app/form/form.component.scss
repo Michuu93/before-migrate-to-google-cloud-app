@@ -1,28 +1,30 @@
-.form {
-  text-align: center;
+:host {
+  .form {
+    text-align: center;
 
-  mat-form-field {
-    margin: 0 5px;
+    mat-form-field {
+      margin: 0 5px;
+    }
   }
-}
 
-.rightButton {
-  text-align: right;
+  .rightButton {
+    text-align: right;
 
-  button {
-    margin-left: 20px;
+    button {
+      margin-left: 20px;
+    }
   }
-}
 
-.centerButton {
-  text-align: center;
-}
+  .centerButton {
+    text-align: center;
+  }
 
-pre {
-  white-space: pre-wrap;
-}
+  pre {
+    white-space: pre-wrap;
+  }
 
-.app-content {
-  width: 600px;
-  margin: 20px auto;
+  .card-content {
+    width: 600px;
+    margin: 20px auto;
+  }
 }

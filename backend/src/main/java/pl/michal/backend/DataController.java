@@ -3,6 +3,7 @@ package pl.michal.backend;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -21,28 +22,33 @@ public class DataController {
     private final DataService dataService;
 
     @PostMapping
-    @ResponseStatus(code = HttpStatus.ACCEPTED)
-    public Data save(@RequestBody @Valid Data data) {
+    public ResponseEntity<Data> save(@RequestBody @Valid Data data) {
         log.debug("> save [data={}]", data);
         Data savedData = dataService.saveInQueue(data);
         log.debug("< save [savedData={}]", savedData);
-        return savedData;
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(savedData);
     }
 
     @GetMapping("/{uuid}")
-    public Data getById(@PathVariable String uuid) {
+    public ResponseEntity<Data> getById(@PathVariable String uuid) {
         log.debug("> getById [uuid={}]", uuid);
         Data dataFromDb = dataService.findByUuid(uuid);
         log.debug("< getById [dataFromDb={}]", dataFromDb);
-        return dataFromDb;
+        if (dataFromDb == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dataFromDb);
     }
 
     @GetMapping
-    public List<Data> getAll() {
+    public ResponseEntity<List<Data>> getAll() {
         log.debug("> getAll");
         List<Data> dataFromDb = dataService.findAll();
         log.debug("< getAll [resultSize={}]", dataFromDb.size());
-        return dataFromDb;
+        if (dataFromDb.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dataFromDb);
     }
 
     @DeleteMapping

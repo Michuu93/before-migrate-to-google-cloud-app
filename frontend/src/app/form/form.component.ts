@@ -5,7 +5,7 @@ import {Data} from "./data";
 @Component({
   selector: 'app-form',
   template: `
-    <mat-card class="app-content">
+    <mat-card class="card-content">
       <form class="form">
         <mat-form-field floatLabel="always">
           <input matInput placeholder="manufacturer" name="manufacturer" [(ngModel)]="data.manufacturer">
@@ -24,7 +24,7 @@ import {Data} from "./data";
         <button (click)="sendData()" color="primary" mat-raised-button>Send</button>
       </div>
     </mat-card>
-    <mat-card class="app-content">
+    <mat-card class="card-content">
       <form class="form">
         <mat-form-field floatLabel="always">
           <input matInput placeholder="uuid" name="uuid" [(ngModel)]="uuid" class="uuid">
@@ -40,7 +40,7 @@ import {Data} from "./data";
         <button (click)="findByUuid()" color="primary" mat-raised-button>Find</button>
       </div>
     </mat-card>
-    <mat-card class="app-content">
+    <mat-card class="card-content">
       <div *ngIf="findAllResponse">Response:
         <pre>{{ findAllResponse | json }}</pre>
       </div>
@@ -48,7 +48,7 @@ import {Data} from "./data";
         <button (click)="findAll()" color="primary" mat-raised-button>Find All</button>
       </div>
     </mat-card>
-    <mat-card class="app-content">
+    <mat-card class="card-content">
       <div *ngIf="deleteAllResponse">Response:
         <pre>{{ deleteAllResponse | json }}</pre>
       </div>
@@ -71,11 +71,17 @@ export class FormComponent {
   }
 
   sendData(): void {
-    this.formService.upsertData(this.data).subscribe(response => this.saveResponse = response, error => this.saveResponse = error.error);
+    this.formService.upsertData(this.data).subscribe(response => this.saveResponse = response, error => this.saveResponse = {
+      httpStatus: error.status,
+      message: error.error !== null ? error.error : undefined
+    });
   }
 
   findByUuid(): void {
-    this.formService.findByUuid(this.uuid).subscribe(response => this.findByUuidResponse = response, error => this.findByUuidResponse = error.error);
+    this.formService.findByUuid(this.uuid).subscribe(response => this.findByUuidResponse = response, error => this.findByUuidResponse = {
+      httpStatus: error.status,
+      message: error.error !== null ? error.error : undefined
+    });
   }
 
   copyUuid(): void {
@@ -83,10 +89,18 @@ export class FormComponent {
   }
 
   findAll(): void {
-    this.formService.findAll().subscribe(response => this.findAllResponse = response, error => this.findAllResponse = error.error);
+    this.formService.findAll().subscribe(response => this.findAllResponse = response, error =>
+      this.findAllResponse = {
+        httpStatus: error.status,
+        message: error.error !== null ? error.error : undefined
+      }
+    );
   }
 
   deleteAll(): void {
-    this.formService.deleteAll().subscribe(() => this.deleteAllResponse = 'Deleted', error => this.deleteAllResponse = error.error);
+    this.formService.deleteAll().subscribe(() => this.deleteAllResponse = 'Deleted', error => this.deleteAllResponse = {
+      httpStatus: error.status,
+      message: error.error
+    });
   }
 }
