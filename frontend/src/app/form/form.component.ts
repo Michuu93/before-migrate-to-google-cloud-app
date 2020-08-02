@@ -36,6 +36,6 @@ export class FormComponent {
   }
 
   sendData() {
-    console.debug(`Sending ${JSON.stringify(this.data)}`);
+    console.log(`Sending ${JSON.stringify(this.data)}`);
   }
 }
