@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      username: michal
+      password: strongpassword
+      database: michal_db
+      port: 27017
+      host: mongodb
+  rabbitmq:
+    username: michal
+    password: strongpassword
+    port: 5672
+    host: rabbitmq

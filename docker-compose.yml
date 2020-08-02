@@ -1,0 +1,54 @@
+version: '3.3'
+services:
+#  frontend:
+#    build: frontend
+
+  backend:
+    build: backend
+    container_name: backend
+    hostname: backend
+    depends_on:
+      - mongo
+      - rabbit
+    links:
+      - mongo
+      - rabbit
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+      - frontend
+
+  mongo:
+    image: mongo:4.4.0
+    container_name: mongodb
+    hostname: mongodb
+    expose:
+      - 27017
+    networks:
+      - backend
+    volumes:
+      - db-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: michal
+      MONGO_INITDB_ROOT_PASSWORD: strongpassword
+
+  rabbit:
+    image: rabbitmq:3.8.6-rc.1-management-alpine
+    container_name: rabbitmq
+    hostname: rabbitmq
+    expose:
+      - 5672
+      - 15672
+    networks:
+      - backend
+    environment:
+      RABBITMQ_DEFAULT_USER: michal
+      RABBITMQ_DEFAULT_PASS: strongpassword
+
+volumes:
+  db-data:
+
+networks:
+  backend:
+  frontend:
