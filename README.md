@@ -13,33 +13,28 @@ Run:
 docker-compose up
 ```
 
+Open:  
+http://localhost:81/
+
 ## Dev
-Run RabbitMQ:
+Run RabbitMQ and MongoDB:
 ```
-docker run --rm --hostname rabbitmq --name rabbitmq -e RABBITMQ_DEFAULT_USER='michal' -e RABBITMQ_DEFAULT_PASS='strongpassword' rabbitmq:3.8.6-rc.1-management-alpine
-```
-
-Run MongoDB:
-```
-docker run --rm --hostname mongodb --name mongodn -e MONGO_INITDB_ROOT_USERNAME='michal' -e MONGO_INITDB_ROOT_PASSWORD='strongpassword' mongo:4.4.0
+docker-compose up mongo rabbit
 ```
 
-Build backend:
+Build and run backend:
 ```
-./backend/mvnw clean install
-```
-
-Run backend:
-```
+cd backend &&
+./backend/mvnw clean install &&
 java -jar TODO
 ```
 
-Build frontend:
+Build and run frontend:
 ```
-cd frontend && yarn install
+cd frontend &&
+yarn install &&
+yarn start
 ```
 
-Run frontend:
-```
-cd frontend && yarn start
-```
+Open:  
+http://localhost:4200/
