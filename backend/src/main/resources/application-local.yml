@@ -12,3 +12,6 @@ spring:
     password: strongpassword
     port: 5672
     host: localhost
+logging:
+  level:
+    pl.michal: DEBUG

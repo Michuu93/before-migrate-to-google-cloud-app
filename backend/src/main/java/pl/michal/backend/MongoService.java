@@ -16,8 +16,8 @@ public class MongoService {
 
     void saveInDatabase(Data data) {
         try {
-            Data savedData = mongoOperations.insert(data);
-            log.info("Saved data in database [savedData={}]", savedData);
+            mongoOperations.insert(data);
+            log.info("Saved data in database");
         } catch (DuplicateKeyException ignore) {
             log.warn("Duplicated data from queue ignored");
         } catch (Exception e) {

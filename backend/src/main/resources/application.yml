@@ -14,4 +14,4 @@ spring:
     host: rabbitmq
 logging:
   level:
-    pl.michal: DEBUG
+    pl.michal: INFO

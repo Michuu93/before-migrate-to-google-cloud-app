@@ -21,6 +21,7 @@ public class RabbitService {
     }
 
     void send(Data data) {
+        log.info("Send data to queue [queue={}, data={}]", RabbitConfig.QUEUE_NAME, data);
         rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_NAME, data);
     }
 }
