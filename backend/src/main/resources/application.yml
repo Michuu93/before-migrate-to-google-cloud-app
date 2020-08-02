@@ -12,3 +12,6 @@ spring:
     password: strongpassword
     port: 5672
     host: rabbitmq
+logging:
+  level:
+    pl.michal: DEBUG

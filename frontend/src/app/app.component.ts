@@ -4,12 +4,9 @@ import {Component} from '@angular/core';
   selector: 'app-root',
   template: `
     <body class="mat-app-background">
-    <mat-card class="app-content">
-      <app-form></app-form>
-    </mat-card>
+    <app-form></app-form>
     </body>
-  `,
-  styleUrls: ['./app.component.scss']
+  `
 })
 export class AppComponent {
   title = 'frontend-app';

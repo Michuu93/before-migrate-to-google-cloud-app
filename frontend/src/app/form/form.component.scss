@@ -8,8 +8,21 @@
 
 .rightButton {
   text-align: right;
+
+  button {
+    margin-left: 20px;
+  }
+}
+
+.centerButton {
+  text-align: center;
 }
 
 pre {
   white-space: pre-wrap;
+}
+
+.app-content {
+  width: 600px;
+  margin: 20px auto;
 }
