@@ -87,6 +87,6 @@ export class FormComponent {
   }
 
   deleteAll(): void {
-    this.formService.deleteAll().subscribe(response => this.deleteAllResponse = 'Deleted', error => this.deleteAllResponse = error.error);
+    this.formService.deleteAll().subscribe(() => this.deleteAllResponse = 'Deleted', error => this.deleteAllResponse = error.error);
   }
 }
