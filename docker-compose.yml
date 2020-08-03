@@ -5,10 +5,11 @@ services:
     container_name: frontend
     ports:
       - 81:80
+    networks:
+      - frontend
   backend:
     build: backend
     container_name: backend
-    hostname: backend
     depends_on:
       - mongo
       - rabbit
@@ -16,10 +17,9 @@ services:
       - mongo
       - rabbit
     ports:
-      - 8080:8080
+      - 9082:8080
     networks:
       - backend
-      - frontend
   mongo:
     image: mongo:4.4.0
     container_name: mongodb
@@ -37,16 +37,20 @@ services:
     image: rabbitmq:3.8.6-rc.1-management-alpine
     container_name: rabbitmq
     hostname: rabbitmq
+    ports:
+      - 15672:15672
     expose:
       - 5672
-      - 15672
     networks:
       - backend
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: michal
       RABBITMQ_DEFAULT_PASS: strongpassword
 volumes:
   db-data:
+  rabbit-data:
 networks:
   backend:
   frontend:

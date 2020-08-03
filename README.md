@@ -13,7 +13,10 @@ Run:
 docker-compose up
 ```
 
-Open:  
+RabbitMQ console:  
+http://localhost:15672/
+
+Application:  
 http://localhost:81/
 
 ## Dev
@@ -29,18 +32,24 @@ Run MongoDB:
 docker run --rm --hostname mongodb --name mongodn -e MONGO_INITDB_ROOT_USERNAME='michal' -e MONGO_INITDB_ROOT_PASSWORD='strongpassword' -p 27017:27017 mongo:4.4.0
 ```
 
-Build and run backend:
+Build backend:
 ```
-cd backend &&
-./backend/mvnw clean install &&
-java -jar -Dspring.profiles.active=local target/backend*.jar
+cd backend && mvn11 clean install
 ```
 
-Build and run frontend:
+Run backend:
 ```
-cd frontend &&
-yarn install &&
-yarn start
+java11 -jar -Dspring.profiles.active=local backend/target/backend*.jar
+```
+
+Build frontend:
+```
+cd frontend && yarn install
+```
+
+Run frontend:
+```
+cd frontend && yarn start
 ```
 
 Open:  
