@@ -13,7 +13,7 @@ Run:
 docker-compose up
 ```
 
-RabbitMQ console:  
+RabbitMQ console (michal:strongpassword):  
 http://localhost:15672/
 
 Application:  
@@ -24,7 +24,7 @@ Run RabbitMQ:
 ```
 docker run --rm --hostname rabbitmq --name rabbitmq -e RABBITMQ_DEFAULT_USER='michal' -e RABBITMQ_DEFAULT_PASS='strongpassword' -p 5672:5672 -p 15672:15672 rabbitmq:3.8.6-rc.1-management-alpine
 ```
-Console:  
+Console (michal:strongpassword):   
 http://localhost:15672/
 
 Run MongoDB:
